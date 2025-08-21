@@ -79,6 +79,39 @@ public:
 
 	}
 
+	void increase_cap() {
+	    if (capacity <= 0) return;
+
+	    int new_cap;
+	    cout << "Enter how much to increase capacity: ";
+	    cin >> new_cap;
+
+	    int *temp = new int[size+1]; // copy only actual used elements
+	    for (int i = 0; i <= size; i++) {
+	        temp[i] = data[i];
+	    }
+
+	    delete [] data;
+
+	    capacity += new_cap; // increase once only
+	    data = new int[capacity];
+
+	    // copy old elements back
+	    for (int i = 0; i <= size; i++) {
+	        data[i] = temp[i];
+	    }
+
+	    // initialize the rest with 0
+	    for (int i = size+1; i < capacity; i++) {
+	        data[i] = 0;
+	    }
+
+	    delete [] temp;
+	    temp = nullptr;
+
+
+	}
+
 	void insertion(){
 		if (isFull()){
 			cout<<"your array is full"<<endl;
@@ -92,7 +125,7 @@ public:
 		cin>>val>>ind;
 
 		if(ind < 0 || ind >= capacity){
-			cout<<"Segmentation fault"<<endl;
+			cout<<"Segmentation -- fault"<<endl;
 			return;
 		}
 
@@ -139,7 +172,11 @@ public:
 		cout<<endl;
 	}
 
-
+	void cont_insertion(){
+		for (int i = 0; i< capacity-1;i++){
+			this->insertion();
+		}
+	}
 	~List(){
 		delete [] data;
 		data = nullptr;
@@ -155,7 +192,14 @@ int main(){
 		li.insertion();
 
 	li.view();
-	li.deletion();
+
+	li.cont_insertion();
+
+
+	li.increase_cap();
+
+
+
 	li.view();
 	return 0;
 }
