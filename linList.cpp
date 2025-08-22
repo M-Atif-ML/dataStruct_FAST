@@ -148,7 +148,6 @@ public:
 			int val;
 			cout<<"Ok now enter value: ";
 			cin>>val;
-
 			deletion_val(val);
 
 		}	
@@ -165,6 +164,7 @@ public:
 	}
 
 
+
 	void view(){
 		for (int i =0 ; i < capacity;i++){
 			cout<<data[i]<<" ";
@@ -177,11 +177,16 @@ public:
 			this->insertion();
 		}
 	}
+	int get_cap(){ return capacity;}
+	int get_size(){ return size;}
 	~List(){
 		delete [] data;
 		data = nullptr;
 	}
 };
+
+
+
 
 
 int main(){
