@@ -22,7 +22,7 @@ private:
 			for(int i = size;i>= ind;i--)
 				data[i+1] = data[i];
 		}	
-		else if(data[ind-1]==0){ // this means that user is breaking the linearity 
+		else if(data[ind-1]==0 and ind != 0){ // this means that user is breaking the linearity 
 			ind  = size+1;
 			cout<<"Index updated: "<<ind<<endl;
 		}
@@ -69,6 +69,25 @@ private:
 
 		cout<<endl;
 	}
+	
+	void delete_All(int val){
+		cout<<"Delete all"<<endl;
+		int count = 0;
+		for(int i = 0 ; i < size;i++){
+			if(data[i] == val){
+				deletion_index(search(val));
+				i--;
+				
+			}
+
+
+				
+		}
+
+
+		
+		
+	}	
 public:
 	List(int capacity){
 		this->capacity = capacity;
@@ -145,10 +164,16 @@ public:
 		cin>>choice;
 
 		if (choice == 'v' || choice == 'V'){
+			char isAll;
+			
 			int val;
 			cout<<"Ok now enter value: ";
 			cin>>val;
-			deletion_val(val);
+			cout<<"Enter do you wanna delete all of the accurance of "<<val<<" (y/n): ";
+			cin>>isAll;
+			
+			if(isAll == 'y') delete_All(val);
+			else deletion_val(val);
 
 		}	
 		else{
@@ -173,7 +198,7 @@ public:
 	}
 
 	void cont_insertion(){
-		for (int i = 0; i< capacity-1;i++){
+		for (int i = 0; i< capacity;i++){
 			this->insertion();
 		}
 	}
@@ -193,16 +218,11 @@ int main(){
 	List li(4);
 	li.view();
 
-	for (int i = 0 ; i< 4;i++)
-		li.insertion();
 
-	li.view();
 
 	li.cont_insertion();
-
-
-	li.increase_cap();
-
+	li.view();
+	li.deletion();
 
 
 	li.view();
