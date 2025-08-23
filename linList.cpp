@@ -187,6 +187,22 @@ public:
 
 		
 	}
+	
+	void minimum(){
+		if (isEmpty()){
+			cout<<"Your list dont have any values yet";
+			return;
+		}	
+		int min = data[0];
+		for(int i = 0; i <= size;i++){
+			if(data[i] < min){
+				min = data[i];
+			}
+		}
+		
+		cout<<"Min:"<<min<<endl;
+	
+	}
 
 
 
@@ -202,6 +218,24 @@ public:
 			this->insertion();
 		}
 	}
+	
+	List operator * (const List & obj2){
+		int min_size = 0;
+		List result(this->size+obj2.size);
+		if(this->size > obj2.size) 
+			min_size = obj2.size;
+		else
+			min_size = this->size;
+			
+		for(int i = 0 ;i < min_size;i++){
+			result.data[i] = this->data[i] * obj2.data[i];
+		}
+		
+		return result;
+		
+		
+	}
+	
 	int get_cap(){ return capacity;}
 	int get_size(){ return size;}
 	~List(){
@@ -216,14 +250,14 @@ public:
 
 int main(){
 	List li(4);
-	li.view();
-
-
-
+	List li2(4);
+	List temp(4+4);
+	li2.cont_insertion();
 	li.cont_insertion();
-	li.view();
-	li.deletion();
+	
+	temp = li.operator*(li2);
 
+	temp.view();
 
 	li.view();
 	return 0;
