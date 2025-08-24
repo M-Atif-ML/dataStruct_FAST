@@ -2,16 +2,20 @@
 using namespace std;
 
 
-// safe array with custom indexing 🤠️
+// safe array with custom indexing 🤠️🤠️🤠️🤠️🤠️🤠️🐎️
 class SafeList {
 private:
 	int *data,starting,ending,capacity,size;
+	
 	bool isFull(){
+		
 		return (size == (capacity-1));
 	}
+	
 	bool isEmpty(){
 		return (size < 0);
 	}
+	
 public:
 	SafeList(int starting,int ending){
 		this->ending =ending;
@@ -19,7 +23,7 @@ public:
 		size= -1;
 		capacity = ending-starting+1;
 		if(ending-starting < 0) {
-			cout<<"Your values are invalid"<<endl;
+			cout<<"Your values are invalid " <<endl;
 			return;
 		}
 		data = new int[capacity];
@@ -29,7 +33,10 @@ public:
 	}
 	
 	void insert(int index,int val){
-		if(isFull()) return ;
+		if(isFull()) {
+			cout<<"Array is full"<<endl;
+			return; 
+		}
 		
 		starting = -starting;
 		index = index+starting;
@@ -44,23 +51,59 @@ public:
 		
 	}
 	
+	bool isPalendrom(){
+		if(isEmpty()) return true; // return true if the list is empty
+		
+		for(int i = 0 ; i <= size;i++){
+			if(this->data[i] != this->data[size-i]) return false;
+		}
+		
+		return true;
+	}
+	
+	void insertEnd(int val){
+		// if(size< 0 || (size == (capacity)-1)) return;
+		insert(starting - size,val);
+
+	}
+	int sum(){
+		int temp = 0;
+		
+		for(int i  =0 ; i <= size;i++){
+			temp += data[i];
+		}
+		return temp;
+	}
+	double mean(){
+		int sum =  this->sum();
+		
+		return sum / (size+1);
+		
+	}
+
 	void view(){
-		for(int i =0 ; i < capacity;i++)
+		for(int i =0 ; i < size+1;i++)
 			cout<<data[i]<<" ";
 		cout<<endl;
 	}
-
 };
 
 
 int main(){
-	SafeList li(-5,9);
-	
+	SafeList li(1,9);
+	// cout<<"hello"<<endl;
 
-	li.view();
-	li.insert(-5,32);
-	li.insert(-4,90);
-	li.insert(-3,78);
+	li.insert(-5,1);
+	li.insert(-5,2);
+	li.insert(-5,3);
+	li.insert(-5,2);
+	li.insert(-5,1);
+	
+	if(li.isPalendrom()) cout<<"The list is palendrom"<<endl;
+	else cout<<"The list is not palendrom"<<endl;
+
+	//li.insertEnd(1002);
+
 
 	li.view();
 	return 0;
