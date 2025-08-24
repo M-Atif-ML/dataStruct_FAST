@@ -16,6 +16,31 @@ private:
 		return (size < 0);
 	}
 	
+	void sort(int *arr){
+		int temp_var = 0;
+		for(int i =0 ; i < size+1;i++){
+			for(int j = i+1;j < size+1;j++){
+				if(arr[i] > arr[j]){
+					temp_var = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp_var;
+				}	
+			}
+		}
+		
+	}
+	
+	int * sort_by_copy(){
+		int * temp_arr = new int[size+1];
+		
+		for(int i= 0 ; i< size+1;i++){
+			temp_arr[i] = data[i];
+		}
+		
+		this->sort(temp_arr);
+		
+		return temp_arr;
+	}
 public:
 	SafeList(int starting,int ending){
 		this->ending =ending;
@@ -82,29 +107,10 @@ public:
 	}
 	
 	
-		
-	int * sort_by_copy(){
-		int * temp_arr = new int[size+1];
-		
-		for(int i= 0 ; i< size+1;i++){
-			temp_arr[i] = data[i];
-		}
-		
-		int temp_var = 0;
-		
-		for(int i =0 ; i < size+1;i++){
-			for(int j = i+1;j < size+1;j++){
-				if(temp_arr[i] > temp_arr[j]){
-					temp_var = temp_arr[i];
-					temp_arr[i] = temp_arr[j];
-					temp_arr[j] = temp_var;
-				}	
-			}
-		}
-		
-		return temp_arr;
-	}
+	void sorted(){
 	
+		this-> sort(this->data);
+	}
 	int median(){
 		int *sorted = this->sort_by_copy(),med_ind = size / 2; 
 		delete [] sorted;
@@ -131,8 +137,7 @@ int main(){
 	li.insert(-5,2);
 	li.insert(-5,1);
 	
-	if(li.isPalendrom()) cout<<"The list is palendrom"<<endl;
-	else cout<<"The list is not palendrom"<<endl;
+	li.sorted();
 	
 	cout<<li.median()<<endl;
 	cout<<li.mean()<<endl;
