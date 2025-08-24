@@ -80,6 +80,38 @@ public:
 		return sum / (size+1);
 		
 	}
+	
+	
+		
+	int * sort_by_copy(){
+		int * temp_arr = new int[size+1];
+		
+		for(int i= 0 ; i< size+1;i++){
+			temp_arr[i] = data[i];
+		}
+		
+		int temp_var = 0;
+		
+		for(int i =0 ; i < size+1;i++){
+			for(int j = i+1;j < size+1;j++){
+				if(temp_arr[i] > temp_arr[j]){
+					temp_var = temp_arr[i];
+					temp_arr[i] = temp_arr[j];
+					temp_arr[j] = temp_var;
+				}	
+			}
+		}
+		
+		return temp_arr;
+	}
+	
+	int median(){
+		int *sorted = this->sort_by_copy(),med_ind = size / 2; 
+		delete [] sorted;
+		
+		return data[med_ind];
+		
+	}
 
 	void view(){
 		for(int i =0 ; i < size+1;i++)
@@ -101,7 +133,9 @@ int main(){
 	
 	if(li.isPalendrom()) cout<<"The list is palendrom"<<endl;
 	else cout<<"The list is not palendrom"<<endl;
-
+	
+	cout<<li.median()<<endl;
+	cout<<li.mean()<<endl;
 	//li.insertEnd(1002);
 
 
