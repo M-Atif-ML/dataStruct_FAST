@@ -79,16 +79,38 @@ private:
 				i--;
 				
 			}
+		
+		}
+		
+	}
+	
+	void selection_sort(){
+		int smallest = 0,temp = 0;
 
+		for(int i =0 ;i <=size;i++){
+			smallest = min(i);
+			temp = data[smallest];
 
-				
+			data[smallest]  =data[i];
+			data[i] = temp;
 		}
 
-
+	}
+	int min(int starting){
+		int smallest = data[starting],index = starting;
 		
+		for(int i =starting;i<=size;i++){
+			if(data[i]  < smallest){
+				smallest = data[i];
+				index = i;
+			}
+		}
+		
+		return index;
 		
 	}	
 public:
+		
 	List(int capacity){
 		this->capacity = capacity;
 		size=-1;
@@ -96,6 +118,16 @@ public:
 		for(int i = 0 ;i < capacity;i++)
 			data[i] = 0;
 
+	}
+	
+	void sort(){
+		if(isEmpty()){
+			cout<<"You array is empty"<<endl;
+			return;
+		}
+		
+		selection_sort();
+		cout<<"Values are sorted"<<endl;
 	}
 
 	void increase_cap() {
@@ -246,19 +278,15 @@ public:
 
 
 
+// input: 1 0 2 0 3 0 4 0 5 0 6 0 7 0
 
 
 int main(){
-	List li(4);
-	List li2(4);
-	List temp(4+4);
-	li2.cont_insertion();
+	List li(7);
 	li.cont_insertion();
+	li.view();
 	
-	temp = li.operator*(li2);
-
-	temp.view();
-
+	li.sort();
 	li.view();
 	return 0;
 }
