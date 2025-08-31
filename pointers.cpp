@@ -93,7 +93,7 @@ using namespace std;
 
 // =======================================================================
 
-
+/*
 void addvalues(string *&arr,int &size ){
 	string *temp = new string[size+1];
 	
@@ -129,8 +129,23 @@ int main(){
 }
 
 
+*/
 
 
+int main(){
+
+	int a = 3, b = 6;
+	int *p1 = &a, *p2 = &b;
+	int **pp = &p1;
+
+	**pp = *p2 + **pp; // step 1
+	pp = &p2;          // step 2
+	**pp = **pp - *p1; // step 3
+
+	cout<<a<<endl;
+	cout<<b<<endl;
+	return 0;
+}
 
 
 

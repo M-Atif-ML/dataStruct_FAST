@@ -1,5 +1,7 @@
 #include<iostream>
 using namespace std;
+const int EXIT= 0,ADD_ITEM = 1,SHOW_CART=2;
+
 
 class Cart{ // idINd = 0 quantInd= 1
 	private:
@@ -26,19 +28,27 @@ class Cart{ // idINd = 0 quantInd= 1
 		itemsData[ind][1] -=1;
 	}
 	void full_removal(int ind){
-		
-			
+
+		cout<<"ind:"<<ind<<endl;
 		if(itemsData[ind][1] == 0){
 			cout<<"Working fine"<<endl;
-			itemsData[ind][0] = 0 ; 
+			itemsData[ind][0] = 0; 
 			itemsData[ind][1] = 0;
 			cout<<"Size: "<<size<<endl;
-			if(itemsData[ind+1][1] != 0){
-				cout<<"Hi motherFucker"<<endl;
+			if(ind+1 < capacity && itemsData[ind+1][1] != 0 ){
+				for(int i =ind;i< size;i++){
+					itemsData[i][0] = itemsData[i+1][0]; 
+					itemsData[i][1] = itemsData[i+1][1];	
+				}
 			}
 			
 			
 		}
+		
+		itemsData[size][0] = 0;
+		itemsData[size][1] = 0;
+		
+
 			
 	}
 	public:
@@ -144,10 +154,13 @@ int main(){
 	Cart cart(size);
 	char choice;
 	int iter= 0 ;
-	cout<<"Do you wanna add an item:";cin>>choice;
-	while((choice == 'y' || choice == 'Y') && iter < size){
+	
+	// cout<<"Enter "<<EXIT<<" to exit"<<ADD_ITEM<<" to add new item "<<SHOW_;
+
+	while(iter < size){
+
+		
 		cart.add_to_cart();
-		cout<<"Do you wanna add an item:";cin>>choice;
 		iter++;
 	}
 	
